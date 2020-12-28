@@ -1,0 +1,7 @@
+{
+  "name": "RyzykoMiazdzycy",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
