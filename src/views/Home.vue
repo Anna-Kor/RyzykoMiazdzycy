@@ -94,7 +94,7 @@
             placeholder="Podaj cholesterol"
             required="true"
           ></ion-input>
-           <ion-input
+        <ion-input
             id="mmol_input"
             type="number"
             min="4"
@@ -105,7 +105,7 @@
             required="true"
           ></ion-input>
         <ion-button type="submit" v-on:click="oblicz">Oblicz</ion-button>
-        <ion-button type="submit" v-on:click="nextPage">Zobacz tabelę ryzyka</ion-button>
+        <ion-button type="submit" :router-link="'/tabelaRyzyka/' + wiek + '/' + plec + '/' + papierosy + '/' + cholesterol + '/' + cisnienie + '/' + jednostka">Zobacz tabelę ryzyka</ion-button>
         <ion-text>
           <p class="result">{{ result }}</p>
         </ion-text>
@@ -142,21 +142,11 @@ export default defineComponent({
     return {
       result: '',
       wiek: '',
-      plec: '',
-      papierosy: '',
+      plec: 'kobieta',
+      papierosy: 'palacy',
       cholesterol: '',
-      jednostka: '',
-      cisnienie: '',
-      person: [
-        {
-          wiekDoTabeli: '',
-          plecDoTabeli: '',
-          papierosyDotabeli: '',
-          cholesterolDoTabeli: '',
-          jednostkaDoTabeli: '',
-          cisnienieDoTabeli: ''
-        }
-      ]
+      jednostka: 'mmol',
+      cisnienie: ''
     };
   },
   methods: {
@@ -1562,7 +1552,7 @@ export default defineComponent({
           else if (Number(this.wiek) >= 50 && Number(this.wiek) < 55) {
             if ((this.jednostka == 'mmol' && Number(this.cholesterol) >= 4 && Number(this.cholesterol) < 5) || (this.jednostka == 'mg' && Number(this.cholesterol) >= 150 && Number(this.cholesterol) < 190)) {
               if (Number(this.cisnienie) >= 120 && Number(this.cisnienie) < 140) {
-                this.result = '2%' + parseInt(this.cisnienie);
+                this.result = '2%';
               }
               else if (Number(this.cisnienie) >= 140 && Number(this.cisnienie) < 160) {
                 this.result = '2%';
@@ -1922,15 +1912,6 @@ export default defineComponent({
         }
       }
     }
-  },
-  nextPage () {
-    this.person[0].wiekDoTabeli = this.wiek;
-    this.person[0].plecDoTabeli = this.plec;
-    this.person[0].papierosyDotabeli = this.papierosy;
-    this.person[0].cholesterolDoTabeli = this.cholesterol;
-    this.person[0].jednostkaDoTabeli = this.jednostka;
-    this.person[0].cisnienieDoTabeli = this.cisnienie;
-    router.push({ name: 'TabelaRyzyka', path: '/tabelaRyzyka' });
   }
 });
 
@@ -1943,9 +1924,5 @@ export default defineComponent({
     width: 100%;
     max-width: 150px;
     height: 28px;
-  }
-  .next-page-link {
-    color: white;
-    text-decoration: none;
   }
 </style>

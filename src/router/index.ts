@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
     props: true
   },
   {
-    path: '/tabelaRyzyka',
+    path: '/tabelaRyzyka/:wiek/:plec/:papierosy/:cholesterol/:cisnienie/:jednostka',
     name: 'TabelaRyzyka',
     component: TabelaRyzyka,
     props: true
